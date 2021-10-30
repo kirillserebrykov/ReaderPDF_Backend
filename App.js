@@ -6,10 +6,11 @@ const URL = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%2
 const dbName = "ReaderPdf"
 mongodb.MongoClient.connect(URL, async function(error, client) {
     assert.ifError(error);
-
+	// init db
     const db = client.db(dbName);
     const colectionFiles = db.collection("fs.files")
     const bucket = new mongodb.GridFSBucket(db);
+	//
     console.log( await UploadFile(bucket,112,4343,colectionFiles))
 
 });
