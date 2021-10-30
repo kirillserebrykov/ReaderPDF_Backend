@@ -39,7 +39,7 @@ export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
 
 
 }
-export const getFiles = (collection) => {
+export const getFiles = (collection,file) => {
      return  collection.find().toArray()
 }
 
