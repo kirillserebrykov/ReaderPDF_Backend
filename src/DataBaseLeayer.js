@@ -8,7 +8,11 @@ const isRepeatFileName = async (nameFile,collection) => {
 
 
 export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
-    // check on repeat name file \\
+
+
+
+
+ /*  // check on repeat name file \\
     let isRepeatFileName = false
     let Err
     const InfoDataFile = await collection.find().toArray()
@@ -20,23 +24,9 @@ export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
     })
     // ============================= \\
 
-    try {
-        if (isRepeatFileName) throw Error("With this name was created")
-        else {
-            fs.createReadStream(pathFile).
-            pipe(bucket.openUploadStream(nameFile)).
-            on('error', function(error) {
-                assert.ifError(error);
-            }).
-            on('finish', function() {
-                console.log('done!');
-            })
-        }
-    } catch (e) {
-       return  e.message
-    }
 
 
+*/
 
 }
 export const getFiles = (collection,file) => {
