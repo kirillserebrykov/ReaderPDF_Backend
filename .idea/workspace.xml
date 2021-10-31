@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7cfdb7f-c7e4-4fe7-9168-d0552af6fdc4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/snipets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataBaseLeayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBaseLeayer.js" afterDir="false" />
@@ -70,22 +71,35 @@
       <workItem from="1635591388174" duration="4370000" />
       <workItem from="1635595797896" duration="4160000" />
       <workItem from="1635613116876" duration="1588000" />
-      <workItem from="1635614742530" duration="10435000" />
+      <workItem from="1635614742530" duration="10855000" />
+      <workItem from="1635661840070" duration="3383000" />
     </task>
+    <task id="LOCAL-00001" summary="read file on frontend">
+      <created>1635629859389</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635629859390</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="read file on frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="read file on frontend" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="419" y="172" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1635432580963">
+    <state x="419" y="172" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1635662607565">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="419" y="172" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1635432580963" />
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1635552529515">
+    <state x="419" y="172" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1635662607565" />
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1635629856864">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1635552529515" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1635629856864" />
     <state width="1345" height="182" key="GridCell.Tab.0.bottom" timestamp="1635599986219">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

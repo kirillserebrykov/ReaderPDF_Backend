@@ -10,43 +10,36 @@ const dbName = "ReaderPdf"
 const fastify = Fastify({
     logger: false
 })
+
+
 mongodb.MongoClient.connect(URL, async function(error, client) {
     assert.ifError(error);
-	// init db
+
     const db = client.db(dbName);
     const colectionFiles = db.collection("fs.files")
     const bucket = new mongodb.GridFSBucket(db);
 
-
-
     fastify.get('/Books', async (request, reply) => {
-        console.log(1)
         reply.send(JSON.stringify(await getFiles(colectionFiles)))
     })
+
 
    fastify.register(fastifyMultipart)
 
 
-    fastify.post("/", async (req, reply) => {
-
+    fastify.post("/UploadBooks", async (req, reply) => {
         const data = await req.file()
         try {
             const filename = await data.filename
             const buffer = await data.toBuffer()
-           // console.log(buffer)
-            await UploadFile(bucket,buffer, filename ,colectionFiles)
-        } catch (err) {
-            // fileSize limit reached!
-        }
+          const UploadFileLog =  await UploadFile(bucket,buffer, filename ,colectionFiles)
+           console.log(UploadFileLog )
+        } catch (err) { }
 
-       //
-        reply.send()
+        reply.send(1)
     })
 
-    //console.log( )
-
-
-
+    
 
     fastify.listen(3000, (err) => {
         if (err) {
