@@ -30,7 +30,7 @@ export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
 
             process.exit(0);
         });
-    return  `${nameFile} created`
+    return  `${nameFile} upload`
     } catch (e) {
 
         return  e.message
