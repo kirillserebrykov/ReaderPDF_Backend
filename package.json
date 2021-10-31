@@ -5,12 +5,15 @@
   "main": "App.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "fastify": "^3.22.1",
+    "fastify-file-upload": "^3.0.0",
+    "fastify-multipart": "^5.0.2",
     "mongodb": "^4.1.3"
   }
 }

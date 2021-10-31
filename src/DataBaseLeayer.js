@@ -1,6 +1,6 @@
 import assert from 'assert'
 import fs from 'fs'
-
+import {bufferToStream} from "./snipets"
 
 const isRepeatFileName = async (nameFile,collection) => {
 
@@ -8,9 +8,8 @@ const isRepeatFileName = async (nameFile,collection) => {
 
 
 export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
-    // check on repeat name file \\
+
     let isRepeatFileName = false
-    let Err
     const InfoDataFile = await collection.find().toArray()
     const ArrNameFile = InfoDataFile.map(elDB => {
         return elDB.filename
@@ -18,28 +17,35 @@ export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
     ArrNameFile.forEach(name => {
         if (name === nameFile) isRepeatFileName = true
     })
-    // ============================= \\
+
 
     try {
-        if (isRepeatFileName) throw Error("With this name was created")
-        else {
-            fs.createReadStream(pathFile).
-            pipe(bucket.openUploadStream(nameFile)).
-            on('error', function(error) {
-                assert.ifError(error);
-            }).
-            on('finish', function() {
-                console.log('done!');
-            })
-        }
+        if(isRepeatFileName) throw Error("this file was created")
+        bufferToStream(pathFile).
+        pipe(bucket.openUploadStream(nameFile)).
+        on('error', function(error) {
+            assert.ifError(error);
+        }).
+        on('finish', function() {
+
+            process.exit(0);
+        });
+    return  `${nameFile} upload`
     } catch (e) {
-       return  e.message
+
+        return  e.message
     }
 
+ /*  // check on repeat name file \\
 
+    // ============================= \\
+
+
+
+*/
 
 }
-export const getFiles = (collection) => {
+export const getFiles = (collection,file) => {
      return  collection.find().toArray()
 }
 
