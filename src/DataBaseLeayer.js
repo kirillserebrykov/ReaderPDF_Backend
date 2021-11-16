@@ -1,68 +1,60 @@
 import assert from 'assert'
-import fs from 'fs'
 import {bufferToStream} from "./snipets"
 
-const isRepeatFileName = async (nameFile,collection) => {
+
+
+
+export const UploadFile = async (bucket, buffer, request_metadata, collection) => {
+
+        let isRepeatFileName = false
+        const InfoDataFile = await collection.find().toArray()
+        const ArrNameFile = InfoDataFile.map(elDB => {
+            return elDB.filename
+        })
+        ArrNameFile.forEach(name => {
+            if (name === request_metadata.filename) isRepeatFileName = true
+        })
+
+        try {
+            if(isRepeatFileName) throw Error(`${request_metadata.filename} was created`)
+            bufferToStream(buffer).
+            pipe(bucket.openUploadStream(request_metadata.filename,{metadata:request_metadata})).
+            on('error', function(error) {
+                assert.ifError(error);
+            }).
+            on('finish', function() {});
+
+         return  `${request_metadata.filename} upload`
+
+        } catch (e) {return  e.message}
 
 }
-
-
-export const UploadFile = async (bucket, pathFile, nameFile, collection ) => {
-
-    let isRepeatFileName = false
-    const InfoDataFile = await collection.find().toArray()
-    const ArrNameFile = InfoDataFile.map(elDB => {
-        return elDB.filename
-    })
-    ArrNameFile.forEach(name => {
-        if (name === nameFile) isRepeatFileName = true
-    })
-
-
-    try {
-        if(isRepeatFileName) throw Error("this file was created")
-        bufferToStream(pathFile).
-        pipe(bucket.openUploadStream(nameFile)).
-        on('error', function(error) {
-            assert.ifError(error);
-        }).
-        on('finish', function() {
-
-            process.exit(0);
-        });
-    return  `${nameFile} upload`
-    } catch (e) {
-
-        return  e.message
-    }
-
- /*  // check on repeat name file \\
-
-    // ============================= \\
-
-
-
-*/
-
-}
-export const getFiles = (collection,file) => {
+export const getFiles = (collection) => {
      return  collection.find().toArray()
 }
 
-export const DownloadFile =  (bucket, file, path) => {
+export const DownloadFile = (bucket, file, reply) => {
 
     try {
-        bucket.openDownloadStreamByName(file).
-        pipe(fs.createWriteStream(`${path}${file}`)).
-        on('error', function(error) {
-            assert.ifError(error);
-        }).
-        on('finish', function() {
-            console.log('done!');
-            process.exit(0);
-        });
+     const stream  =  bucket.openDownloadStreamByName(file)
+        stream.read();
+        return new Promise((resolve, reject) => {
+            const chunks = [];
+            stream.on('data', data => {
+                chunks.push(data);
+            });
+
+            stream.on('end', () => {
+                const data = Buffer.concat(chunks);
+                resolve(data);
+            });
+
+            stream.on('error', err => {
+                reject(err);
+            });
+        })
     } catch (e) {
-        return e
+        reply.send(e.message)
     }
 
 }
